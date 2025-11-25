@@ -79,12 +79,15 @@ You do not need to install Python libraries or R packages manually. The only req
       * [**Docker Desktop / Engine:**](https://docker.com/) Best for local development and workstations.
       * **[Apptainer](https://apptainer.org/) (formerly [Singularity](https://sylabs.io/singularity/)):** **Required** for HPC clusters and shared servers.
 
-3.  **Clone this Repository:**
+-----
 
-    ```bash
-    git clone https://github.com/the-ahuja-lab/evolf-pipeline.git
-    cd evolf-pipeline
-    ```
+## System Requirements
+
+1. EvOlf pipeline required minimum of 12 GB to run properly as it utilizes various pytorch and tensorflow models for generating featurizers.
+2. To make use of parallel processing provided by nextflow, a multi-core processor system is required.
+3. Although GPU is not reuired to  run EvOlf, it is still a preferrable choice to run EvOlf on GPU with minimum of 12GB vRAM to make the pipeline quick.
+
+Kindly refer to [Hardware Configuration](#hardware-profiles--profile) section to see how to configure hardware setting and profiles as per your system.
 
 -----
 
@@ -129,7 +132,7 @@ CCN,MGA...
 Use this for running a single dataset.
 
 ```bash
-nextflow run main.nf \
+nextflow run the-ahuja-lab/evolf-pipeline \
     --inputFile "data/my_experiment.csv" \
     --ligandSmiles "SMILES" \
     --receptorSequence "Sequence" \
@@ -152,7 +155,7 @@ inputFile,ligandSmiles,receptorSequence,ligandID,receptorID,lrID
 **Run Command:**
 
 ```bash
-nextflow run main.nf \
+nextflow run the-ahuja-lab/evolf-pipeline \
     --batchFile "batch_manifest.csv" \
     --outdir "./results/batch_run" \
     -profile docker,gpu
@@ -198,6 +201,12 @@ The first time you run EvOlf, it will download \~15GB of model weights (Hugging 
 
   * **Location:** These are stored in `~/.evolf_cache` in your home directory.
   * **Benefit:** They are downloaded **only once**. All subsequent runs (even in different project folders) will use this centralized cache.
+
+### Resource Management
+
+The nextflow pipeline is limited to utilising 4 CPU cores and 16GB RAM by default. You can change these defaults by providing the following parameters along with input:
+- `--maxCPUs` to set the maximum number of CPU cores nextflow can utilise to run EvOlf.
+- `--maxMemory` to set the maximum amount of RAM EvOlf pipeline can use.
 
 -----
 
