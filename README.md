@@ -28,12 +28,12 @@ This repository contains the [**Nextflow pipeline**](https://www.nextflow.io/) i
 
 ## Pipeline Architecture
 
-The EvOlf pipeline is a modular, multi-stage workflow built on Nextflow. It parallelizes the heavy lifting of feature generation across multiple containers.
+The EvOlf pipeline is a modular, multi-stage workflow built on Nextflow. It parallelises the heavy lifting of feature generation across multiple containers.
 
-### 1\. Input Standardization (`PREPARE_INPUT`)
+### 1\. Input Standardisation (`PREPARE_INPUT`)
 
   - Validates input CSV formats.
-  - Standardizes SMILES strings and checks for invalid characters.
+  - Standardises SMILES strings and checks for invalid characters.
   - Maps user-provided IDs or generates auto-incrementing IDs (`L1`, `R1`, `LR1`) to track interactions throughout the pipeline.
 
 ### 2\. Multi-Modal Featurization
@@ -83,11 +83,11 @@ You do not need to install Python libraries or R packages manually. The only req
 
 ## System Requirements
 
-1. EvOlf pipeline required minimum of 12 GB to run properly as it utilizes various pytorch and tensorflow models for generating featurizers.
-2. To make use of parallel processing provided by nextflow, a multi-core processor system is required.
-3. Although GPU is not reuired to  run EvOlf, it is still a preferrable choice to run EvOlf on GPU with minimum of 12GB vRAM to make the pipeline quick.
+1. EvOlf pipeline requires a minimum of 12 GB to run properly as it utilises various PyTorch and TensorFlow models for generating featurizers.
+2. To make use of parallel processing provided by Nextflow, a multi-core processor system is required.
+3. Although a GPU is not required to run EvOlf, it is still a preferable choice to run EvOlf on a GPU with a minimum of 12GB vRAM to make the pipeline quick.
 
-Kindly refer to [Hardware Configuration](#hardware-profiles--profile) section to see how to configure hardware setting and profiles as per your system.
+Kindly refer to [Hardware Configuration](#hardware-profiles--profile) section to see how to configure hardware settings and profiles as per your system.
 
 -----
 
@@ -133,11 +133,11 @@ Use this for running a single dataset.
 
 ```bash
 nextflow run the-ahuja-lab/evolf-pipeline \
-    --inputFile "data/my_experiment.csv" \
+ --inputFile "data/my_experiment.csv" \
     --ligandSmiles "SMILES" \
-    --receptorSequence "Sequence" \
+ --receptorSequence "Sequence" \
     --outdir "./results/experiment_1" \
-    -profile docker,gpu
+ -profile docker,gpu
 ```
 
 ### 2\. Batch Mode (High-Throughput)
@@ -156,9 +156,9 @@ inputFile,ligandSmiles,receptorSequence,ligandID,receptorID,lrID
 
 ```bash
 nextflow run the-ahuja-lab/evolf-pipeline \
-    --batchFile "batch_manifest.csv" \
+ --batchFile "batch_manifest.csv" \
     --outdir "./results/batch_run" \
-    -profile docker,gpu
+ -profile docker,gpu
 ```
 
 -----
@@ -200,13 +200,13 @@ results/
 The first time you run EvOlf, it will download \~15GB of model weights (Hugging Face transformers).
 
   * **Location:** These are stored in `~/.evolf_cache` in your home directory.
-  * **Benefit:** They are downloaded **only once**. All subsequent runs (even in different project folders) will use this centralized cache.
+  * **Benefit:** They are downloaded **only once**. All subsequent runs (even in different project folders) will use this centralised cache.
 
 ### Resource Management
 
-The nextflow pipeline is limited to utilising 4 CPU cores and 16GB RAM by default. You can change these defaults by providing the following parameters along with input:
-- `--maxCPUs` to set the maximum number of CPU cores nextflow can utilise to run EvOlf.
-- `--maxMemory` to set the maximum amount of RAM EvOlf pipeline can use.
+The Nextflow pipeline utilises 4 CPU cores and 16GB of RAM by default. You can change these defaults by providing the following parameters along with input:
+- `--maxCPUs` to set the maximum number of CPU cores NextFlow can utilise to run EvOlf.
+- `--maxMemory` to set the maximum amount of RAM the EvOlf pipeline can use.
 
 -----
 
@@ -240,11 +240,12 @@ The EvOlf Pipeline was developed by the **Ahuja Lab** at IIIT-Delhi.
   * **Syed Yasser** ([@yasservision24](https://github.com/yasservision24))
   * **Pranjal Sharma** ([@PRANJAL2208](https://github.com/PRANJAL2208))
   * **Saveena Solanki** ([@SaveenaSolanki](https://github.com/SaveenaSolanki))
-  * **Ayushi Mittal** ([@Aayushi006](https://github.com/Aayushi006))
+  * **Aayushi Mittal** ([@Aayushi006](https://github.com/Aayushi006))
+  * **Mudit Gupta** ([@MaddyG-05](https://github.com/MaddyG-05))
 
 ### Related Repositories
 
   * **Pipeline (This Repo):** [evolf-pipeline](https://github.com/the-ahuja-lab/evolf-pipeline)
-  * **Source Code & Development:** [evolf-pipeline-source](https://www.google.com/search?q=https://github.com/the-ahuja-lab/evolf-pipeline-source)
+  * **Source Code, Development & Training Code:** [EvOlf](https://www.google.com/search?q=https://github.com/the-ahuja-lab/EvOlf)
 
 -----
